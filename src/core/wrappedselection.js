@@ -170,13 +170,17 @@
                     if (chromeMatch && parseInt(chromeMatch[1]) >= 36) {
                         selectionSupportsMultipleRanges = false;
                     } else {
-                        var r2 = r1.cloneRange();
-                        r1.setStart(textNode, 0);
-                        r2.setEnd(textNode, 3);
-                        r2.setStart(textNode, 2);
-                        sel.addRange(r1);
-                        sel.addRange(r2);
-                        selectionSupportsMultipleRanges = (sel.rangeCount == 2);
+                        try {
+                            var r2 = r1.cloneRange();
+                            r1.setStart(textNode, 0);
+                            r2.setEnd(textNode, 3);
+                            r2.setStart(textNode, 2);
+                            sel.addRange(r1);
+                            sel.addRange(r2);
+                            selectionSupportsMultipleRanges = (sel.rangeCount == 2);
+                        } catch (e) {
+                            selectionSupportsMultipleRanges = false;
+                        }
                     }
                 }
 
